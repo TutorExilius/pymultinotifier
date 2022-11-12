@@ -39,30 +39,5 @@ class DBManagerConfig:
 class PyMultiNotifierConfig:
     """PyMultiNotifier Config Model."""
 
-
-@serde(type_check=Strict)
-@dataclass
-class DiscordConfig:
-    """DiscordConfig Config Model."""
-
-    web_hook: str
-
-
-@serde(type_check=Strict)
-@dataclass
-class TelegramConfig:
-    """TelegramConfig Config Model."""
-
-    token: str
-    chat_id: str
-
-
-@serde(type_check=Strict)
-@dataclass
-class TwitterConfig:
-    """TwitterConfig Config Model."""
-
-    consumer_key: str
-    consumer_secret: str
-    access_token: str
-    access_token_secret: str
+    app_name: str
+    app_version: str

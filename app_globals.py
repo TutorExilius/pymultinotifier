@@ -1,6 +1,7 @@
 from pymultinotifier.config.manager import ConfigManager
 
-PRODUCT_NAME = "PyMultiNotifier"
-PRODUCT_VERSION = "1.0"
-
 config = ConfigManager()
+
+PRODUCT_NAME = config.pymultinotifier_config.app_name
+PRODUCT_VERSION = config.pymultinotifier_config.app_version
+

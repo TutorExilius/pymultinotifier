@@ -5,9 +5,8 @@ from pathlib import Path
 import toml
 from serde.toml import from_toml
 
-from pymultinotifier.config.models import (DBManagerConfig, DiscordConfig,
-                                           PyMultiNotifierConfig,
-                                           TelegramConfig, TwitterConfig)
+from pymultinotifier.config.models import (DBManagerConfig,
+                                           PyMultiNotifierConfig)
 
 
 class ConfigManager:  # pylint: disable=R0903
@@ -20,13 +19,4 @@ class ConfigManager:  # pylint: disable=R0903
         )
         self.pymultinotifier_config = from_toml(
             PyMultiNotifierConfig, toml.dumps(self.all_config["pymultinotifier"])
-        )
-        self.discord_config = from_toml(
-            DiscordConfig, toml.dumps(self.all_config["discord"])
-        )
-        self.telegram_config = from_toml(
-            TelegramConfig, toml.dumps(self.all_config["telegram"])
-        )
-        self.twitter_config = from_toml(
-            TwitterConfig, toml.dumps(self.all_config["twitter"])
         )

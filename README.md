@@ -4,8 +4,14 @@ A python flet app to post messages to Discord, Twitter or Telegram (more platfor
 
 
 ## Installation
-...
+### 1. Configuration of the app
 
+Config file is needed!
+
+1. Copy the file `pymultinotifier/doc/examples/config_example.toml` in 
+path `pymultinotifier/pymultinotifier/config/` and rename the file to `config.toml` 
+
+2. Add your platform credentials (you can remove platforms by deleting the whole related section)
 
 ## Development
 
