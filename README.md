@@ -16,7 +16,7 @@ path `pymultinotifier/pymultinotifier/config/` and rename the file to `config.to
 ## Development
 
 ### Database Management
-#### Alembic ASYNC:
+#### Alembic Init:
 alembic init alembic
 
 #### Alembic Auto-Migration
