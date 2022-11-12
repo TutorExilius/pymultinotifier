@@ -1,6 +1,7 @@
 /votingsystem/config/config.toml
 .coverage
 *.sqlite3
+config.toml
 
 
 # Created by .ignore support plugin (hsz.mobi)
