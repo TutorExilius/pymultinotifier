@@ -2,12 +2,12 @@
 
 from typing import Any
 
-from sqlalchemy import (Column, DateTime, Enum, ForeignKey, Integer, MetaData,
-                        String, func)
+from sqlalchemy import (JSON, Column, DateTime, Enum, ForeignKey, Integer,
+                        MetaData, String, func)
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 from sqlalchemy.orm import relationship
 
-from pymultinotifier.types import PlatformType
+from pymultinotifier.type_definitions import PlatformType
 from pymultinotifier.utils import helper
 
 meta = MetaData(
@@ -39,16 +39,6 @@ class BaseModel(Base):  # pylint: disable=too-few-public-methods
     def __init_subclass__(cls, **kwargs: dict[Any, Any]) -> None:
         cls.__tablename__ = helper.camel_to_snake_case(cls.__name__)
 
-    def dict(self) -> dict[str, Any]:
-        """Convert the object to a dict representation."""
-
-        dict_ = {}
-
-        for column in self.__table__.columns:
-            dict_[column.name] = self.column.name
-
-        return dict_
-
 
 class BaseModelWithID(BaseModel):  # pylint: disable=R0903
     """The base model for all SQLAlchemy database models,
@@ -66,7 +56,7 @@ class Post(BaseModelWithID):  # pylint: disable=R0903
     platform_id = Column(
         Integer, ForeignKey("platform.id", ondelete="cascade"), nullable=False
     )
-    platform = relationship("Platform", backref="post_history")
+    platform = relationship("Platform", backref="post_history", lazy="subquery")
 
 
 class Platform(BaseModelWithID):  # pylint: disable=R0903
@@ -74,11 +64,12 @@ class Platform(BaseModelWithID):  # pylint: disable=R0903
 
     name = Column(String, nullable=False)
     platform_type = Column(Enum(PlatformType), nullable=False)
+    credentials = Column(JSON, nullable=False)
 
     profile_id = Column(
         Integer, ForeignKey("profile.id", ondelete="cascade"), nullable=False
     )
-    profile = relationship("Profile", backref="platforms")
+    profile = relationship("Profile", backref="platforms", lazy="subquery")
 
 
 class Profile(BaseModelWithID):  # pylint: disable=R0903
